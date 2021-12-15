@@ -1,2 +1,13 @@
 # animal_shelter
-Animal shelter system.
+
+# O Que É?
+É um CRUD (Create, Read, Update e Delete) de abrigos de animais.
+
+# Tecnologias Utilizadas:
+* Java
+*  Springboot
+*  MongoDB
+*  Docker
+
+# Como Executar a Aplicação
+
