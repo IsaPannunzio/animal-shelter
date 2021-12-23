@@ -1,14 +1,13 @@
 package com.ibm.animalshelter.model.collections;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import org.springframework.data.annotation.Id;
 
 import javax.validation.constraints.NotBlank;
 
-public class Shelter {
+public class Voluntario {
 
     @Id
-    private String codigo;
+    private String cpf;
 
     @NotBlank
     private String nome;
@@ -19,20 +18,20 @@ public class Shelter {
     @NotBlank
     private String telefone;
 
-    public Shelter(String codigo, String nome, String endereco, String telefone) {
+    public Voluntario(String cpf, String nome, String endereco, String telefone) {
 
-        this.codigo = codigo;
+        this.cpf = cpf;
         this.nome = nome;
         this.endereco = endereco;
         this.telefone = telefone;
     }
 
-    public String getCodigo() {
-        return codigo;
+    public String getCpf() {
+        return cpf;
     }
 
-    public void setCodigo(String codigo) {
-        this.codigo = codigo;
+    public void setCpf(String cpf) {
+        this.cpf = cpf;
     }
 
     public String getNome() {
@@ -59,6 +58,3 @@ public class Shelter {
         this.telefone = telefone;
     }
 }
-
-
-

@@ -1,4 +1,4 @@
 package com.ibm.animalshelter.controllers;
 
-public class VolunteerController {
+public class VoluntarioController {
 }
