@@ -16,7 +16,6 @@ public class Shelter {
     @NotBlank
     private String endereco;
 
-    @JsonFormat(pattern = " ")
     @NotBlank
     private String telefone;
 
@@ -60,5 +59,6 @@ public class Shelter {
         this.telefone = telefone;
     }
 }
+
 
 
