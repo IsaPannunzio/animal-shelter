@@ -1,14 +1,16 @@
-package com.ibm.animalshelter.model.collections;
+package com.ibm.animalshelter.model.collection;
 
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
+@Document(collection = "animal")
 public class Animal {
 
     @Id
-    private String codigo;
+    private String id;
 
     @NotBlank
     private String nome;
@@ -28,9 +30,9 @@ public class Animal {
     @NotBlank
     private boolean castrado;
 
-    public Animal(String codigo, String nome, String tipo, String raca, String sexo, int idade, boolean castrado) {
+    public Animal(String id, String nome, String tipo, String raca, String sexo, int idade, boolean castrado) {
 
-        this.codigo = codigo;
+        this.id = id;
         this.nome = nome;
         this.tipo = tipo;
         this.raca = raca;
@@ -39,12 +41,12 @@ public class Animal {
         this.castrado = castrado;
     }
 
-    public String getCodigo() {
-        return codigo;
+    public String getId() {
+        return id;
     }
 
-    public void setCodigo(String codigo) {
-        this.codigo = codigo;
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getNome() {

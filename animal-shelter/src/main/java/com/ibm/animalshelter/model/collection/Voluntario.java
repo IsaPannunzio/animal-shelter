@@ -1,13 +1,15 @@
-package com.ibm.animalshelter.model.collections;
+package com.ibm.animalshelter.model.collection;
 
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 
 import javax.validation.constraints.NotBlank;
 
+@Document(collection = "voluntario")
 public class Voluntario {
 
     @Id
-    private String cpf;
+    private String id;
 
     @NotBlank
     private String nome;
@@ -18,20 +20,20 @@ public class Voluntario {
     @NotBlank
     private String telefone;
 
-    public Voluntario(String cpf, String nome, String endereco, String telefone) {
+    public Voluntario(String id, String nome, String endereco, String telefone) {
 
-        this.cpf = cpf;
+        this.id = id;
         this.nome = nome;
         this.endereco = endereco;
         this.telefone = telefone;
     }
 
-    public String getCpf() {
-        return cpf;
+    public String getId() {
+        return id;
     }
 
-    public void setCpf(String cpf) {
-        this.cpf = cpf;
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getNome() {
