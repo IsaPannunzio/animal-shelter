@@ -1,20 +1,20 @@
 package com.ibm.animalshelter.service;
 
-import com.ibm.animalshelter.model.collection.Abrigo;
 import com.ibm.animalshelter.model.collection.Voluntario;
-import com.ibm.animalshelter.repository.VoluntarioRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
-public class VoluntarioService {
+public interface VoluntarioService {
 
-    @Autowired
-    VoluntarioRepository voluntarioRepository;
+    List<Voluntario> obterTodos();
 
-    public Voluntario createVoluntario(Voluntario voluntario) {
+    Voluntario obterPorCodigo(String id);
 
-        return voluntarioRepository.save(voluntario);
+    Voluntario salvar(Voluntario voluntario);
 
-    }
+    Voluntario atualizar(Voluntario voluntario);
+
+    void deletar(String id);
 }

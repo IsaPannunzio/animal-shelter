@@ -1,20 +1,20 @@
 package com.ibm.animalshelter.service;
 
-import com.ibm.animalshelter.model.collection.Abrigo;
 import com.ibm.animalshelter.model.collection.Animal;
-import com.ibm.animalshelter.repository.AnimalRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
-public class AnimalService {
+public interface AnimalService {
 
-    @Autowired
-    AnimalRepository animalRepository;
+    List<Animal> obterTodos();
 
-    public Animal createAnimal(Animal animal) {
+    Animal obterPorCodigo(String id);
 
-        return animalRepository.save(animal);
+    Animal salvar(Animal animal);
 
-    }
+    Animal atualizar(Animal animal);
+
+    void deletar(String id);
 }

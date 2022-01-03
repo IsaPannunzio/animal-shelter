@@ -1,21 +1,22 @@
 package com.ibm.animalshelter.service;
 
 import com.ibm.animalshelter.model.collection.Abrigo;
-import com.ibm.animalshelter.repository.AbrigoRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestBody;
+
+
+import java.util.List;
 
 @Service
-public class AbrigoService {
+public interface AbrigoService {
 
-    @Autowired
-    AbrigoRepository abrigoRepository;
+    List<Abrigo> obterTodos();
 
-    public Abrigo createAbrigo( Abrigo abrigo) {
+    Abrigo obterPorCodigo(String id);
 
-        return abrigoRepository.save(abrigo);
+    Abrigo salvar(Abrigo abrigo);
 
-    }
+    Abrigo atualizar(Abrigo abrigo);
+
+    void deletar(String id);
 
 }
