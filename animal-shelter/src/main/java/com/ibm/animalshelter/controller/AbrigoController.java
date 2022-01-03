@@ -1,14 +1,20 @@
 package com.ibm.animalshelter.controller;
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RestController;
+import com.ibm.animalshelter.model.collection.Abrigo;
+import com.ibm.animalshelter.service.AbrigoService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
+@RequestMapping("/api/abrigo")
 public class AbrigoController {
 
-    @GetMapping
-    public String HelloWorld()
-    {
-        return "Hello World!";
-    }
+@Autowired
+AbrigoService abrigoService;
+
+@PostMapping("/create")
+public Abrigo createAbrigo(@RequestBody Abrigo abrigo){
+    return abrigoService.createAbrigo(abrigo);
+}
+
 }
