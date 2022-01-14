@@ -7,7 +7,7 @@ import org.springframework.data.mongodb.repository.config.EnableMongoRepositorie
 
 @SpringBootApplication
 @EnableMongoRepositories("com.ibm.animalshelter.repository")
-@ComponentScan("com.ibm.*")
+@ComponentScan("com.ibm.animalshelter.*")
 public class AnimalShelterApplication {
 
 	public static void main(String[] args) {

@@ -3,6 +3,8 @@ package com.ibm.animalshelter.controller;
 import com.ibm.animalshelter.model.collection.Animal;
 import com.ibm.animalshelter.repository.AnimalRepository;
 import com.ibm.animalshelter.service.AnimalService;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,6 +16,8 @@ import java.util.logging.Logger;
 
 @RestController
 @RequestMapping("/api/animal")
+@Api(value = "API REST Animal")
+@CrossOrigin(origins = "*")
 public class AnimalController {
 
     @Autowired
@@ -24,6 +28,7 @@ public class AnimalController {
     Logger logger = Logger.getLogger("com.ibm.animalshelter.controller");
 
     @GetMapping
+    @ApiOperation(value = "Retorna todos os animais cadastrados")
     public ResponseEntity<List<Animal>> obterTodos() {
 
         logger.info("Busca por todos os animais no banco de dados realizada");
@@ -38,6 +43,7 @@ public class AnimalController {
     }
 
     @GetMapping("/{id}")
+    @ApiOperation(value = "Retorna o animal com ID correspondente")
     public ResponseEntity<Animal> obterPorCodigo(@PathVariable String id) {
 
         logger.info("Busca pelo animal com ID correspondente no banco de dados realizada");
@@ -53,6 +59,7 @@ public class AnimalController {
     }
 
     @PostMapping("/cadastro")
+    @ApiOperation(value = "Salva o animal no banco de dados")
     public ResponseEntity<Animal> salvar(@RequestBody @Valid Animal animal) {
 
 
@@ -68,6 +75,7 @@ public class AnimalController {
     }
 
     @PutMapping("/{id}")
+    @ApiOperation(value = "Atualiza o animal com ID correspondente")
     public ResponseEntity<Animal> atualizar(@Valid @PathVariable String id, @RequestBody Animal animal) {
 
         logger.info("Iniciando a atualização do animal no banco de dados");
@@ -86,6 +94,7 @@ public class AnimalController {
     }
 
     @DeleteMapping("/{id}")
+    @ApiOperation(value = "Deleta o animal com ID correspondente")
     public ResponseEntity<Void> deletar(@PathVariable String id) {
 
         if (!animalRepository.existsById(id)) {
