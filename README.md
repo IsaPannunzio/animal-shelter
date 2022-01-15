@@ -1,13 +1,15 @@
-# animal_shelter
+# Animal Shelter
 
 # Sobre
-Esse projeto é um CRUD (Create, Read, Update e Delete) de abrigos de animais.
+Esse projeto é uma API REST de Abrigo de Animais.
 
 # Tecnologias Utilizadas
 * Java
-*  Springboot
-*  MongoDB
-*  Docker
+* Springboot
+* MongoDB
+* Docker
 
-# Como Executar a Aplicação
+# Link da API no Heroku
+
+https://abrigo-de-animais.herokuapp.com/swagger-ui/index.html
 
