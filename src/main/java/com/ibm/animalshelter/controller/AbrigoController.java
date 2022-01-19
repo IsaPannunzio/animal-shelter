@@ -4,13 +4,12 @@ import com.ibm.animalshelter.model.collection.Abrigo;
 import com.ibm.animalshelter.repository.AbrigoRepository;
 import com.ibm.animalshelter.service.AbrigoService;
 import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
+import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import javax.lang.model.util.Elements;
 import javax.validation.Valid;
 import java.util.List;
 import java.util.logging.Logger;
@@ -29,7 +28,7 @@ public class AbrigoController {
     Logger logger = Logger.getLogger("com.ibm.animalshelter.controller");
 
     @GetMapping
-    @ApiOperation(value = "Retorna todos os abrigos cadastrados")
+    @Operation(summary = "Retorna todos os abrigos cadastrados")
     public ResponseEntity<List<Abrigo>> obterTodos() {
 
         logger.info("Busca por todos os abrigos no banco de dados realizada");
@@ -44,7 +43,7 @@ public class AbrigoController {
     }
 
     @GetMapping("/{id}")
-    @ApiOperation(value = "Retorna o abrigo com ID correspondente")
+    @Operation(summary = "Retorna o abrigo com ID correspondente")
     public ResponseEntity<Abrigo> obterPorCodigo(@PathVariable String id) {
 
         logger.info("Busca pelo abrigo com ID correspondente no banco de dados realizada");
@@ -60,7 +59,7 @@ public class AbrigoController {
     }
 
     @PostMapping("/cadastro")
-    @ApiOperation(value = "Salva o abrigo no banco de dados")
+    @Operation(summary = "Salva o abrigo no banco de dados")
     public ResponseEntity<Abrigo> salvar(@RequestBody @Valid Abrigo abrigo) {
 
 
@@ -76,7 +75,7 @@ public class AbrigoController {
     }
 
     @PutMapping("/{id}")
-    @ApiOperation(value = "Atualiza o abrigo com ID correspondente")
+    @Operation(summary = "Atualiza o abrigo com ID correspondente")
     public ResponseEntity<Abrigo> atualizar(@Valid @PathVariable String id, @RequestBody Abrigo abrigo) {
 
         logger.info("Iniciando a atualização do abrigo no banco de dados");
@@ -95,7 +94,7 @@ public class AbrigoController {
     }
 
     @DeleteMapping("/{id}")
-    @ApiOperation(value = "Deleta o abrigo com ID correspondente")
+    @Operation(summary = "Deleta o abrigo com ID correspondente")
     public ResponseEntity<Void> deletar(@PathVariable String id) {
 
         if (!abrigoRepository.existsById(id)) {

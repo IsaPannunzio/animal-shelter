@@ -1,12 +1,10 @@
 package com.ibm.animalshelter.controller;
 
-import com.ibm.animalshelter.model.collection.Abrigo;
-import com.ibm.animalshelter.model.collection.Animal;
 import com.ibm.animalshelter.model.collection.Voluntario;
 import com.ibm.animalshelter.repository.VoluntarioRepository;
 import com.ibm.animalshelter.service.VoluntarioService;
 import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
+import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -30,7 +28,7 @@ public class VoluntarioController {
     Logger logger = Logger.getLogger("com.ibm.animalshelter.controller");
 
     @GetMapping
-    @ApiOperation(value = "Retorna todos os voluntários cadastrados")
+    @Operation(summary = "Retorna todos os voluntários cadastrados")
     public ResponseEntity<List<Voluntario>> obterTodos() {
 
         logger.info("Busca por todos os voluntários no banco de dados realizada");
@@ -45,7 +43,7 @@ public class VoluntarioController {
     }
 
     @GetMapping("/{id}")
-    @ApiOperation(value = "Retorna o voluntário com ID correspondente")
+    @Operation(summary = "Retorna o voluntário com ID correspondente")
     public ResponseEntity<Voluntario> obterPorCodigo(@PathVariable String id) {
 
         logger.info("Busca pelo abrigo com ID correspondente no banco de dados realizada");
@@ -61,7 +59,7 @@ public class VoluntarioController {
     }
 
     @PostMapping("/cadastro")
-    @ApiOperation(value = "Salva o voluntário no banco de dados")
+    @Operation(summary = "Salva o voluntário no banco de dados")
     public ResponseEntity<Voluntario> salvar(@RequestBody @Valid Voluntario voluntario) {
 
 
@@ -77,7 +75,7 @@ public class VoluntarioController {
     }
 
     @PutMapping("/{id}")
-    @ApiOperation(value = "Atualiza o voluntário com ID correspondente")
+    @Operation(summary = "Atualiza o voluntário com ID correspondente")
     public ResponseEntity<Voluntario> atualizar(@Valid @PathVariable String id, @RequestBody Voluntario voluntario) {
 
         logger.info("Iniciando a atualização do voluntário no banco de dados");
@@ -96,7 +94,7 @@ public class VoluntarioController {
     }
 
     @DeleteMapping("/{id}")
-    @ApiOperation(value = "Deleta o voluntário com ID correspondente")
+    @Operation(summary = "Deleta o voluntário com ID correspondente")
     public ResponseEntity<Void> deletar(@PathVariable String id) {
 
         if (!voluntarioRepository.existsById(id)) {
