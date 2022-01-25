@@ -5,6 +5,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 
 @Document(collection = "animal")
 public class Animal {
@@ -12,22 +13,25 @@ public class Animal {
     @Id
     private String id;
 
-    @NotBlank
+    @NotBlank(message = "O campo deve ser preenchido")
+    @Pattern(regexp = "[A-Za-z ]+$", message = "O campo deve conter apenas letras")
     private String nome;
 
-    @NotBlank
+    @NotBlank(message = "O campo deve ser preenchido")
+    @Pattern(regexp = "[A-Za-z ]+$", message = "O campo deve conter apenas letras")
     private String tipo;
 
-    @NotBlank
+    @NotBlank(message = "O campo deve ser preenchido")
+    @Pattern(regexp = "[A-Za-z ]+$", message = "O campo deve conter apenas letras")
     private String raca;
 
-    @NotBlank
+    @NotBlank(message = "O campo deve ser preenchido")
+    @Pattern(regexp = "[A-Za-z ]+$", message = "O campo deve conter apenas letras")
     private String sexo;
 
     @NotNull
     private int idade;
 
-    @NotBlank
     private boolean castrado;
 
     public Animal(String id, String nome, String tipo, String raca, String sexo, int idade, boolean castrado) {

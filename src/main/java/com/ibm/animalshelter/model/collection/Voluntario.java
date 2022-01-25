@@ -4,6 +4,7 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Pattern;
 
 @Document(collection = "voluntario")
 public class Voluntario {
@@ -11,13 +12,15 @@ public class Voluntario {
     @Id
     private String id;
 
-    @NotBlank
+    @NotBlank(message = "O campo deve ser preenchido")
+    @Pattern(regexp = "[A-Za-z ]+$", message = "O campo deve conter apenas letras")
     private String nome;
 
-    @NotBlank
+    @NotBlank(message = "O campo deve ser preenchido")
     private String endereco;
 
-    @NotBlank
+    @NotBlank(message = "O campo deve ser preenchido")
+    @Pattern(regexp = "[0-9]+$", message = "O campo deve conter apenas números")
     private String telefone;
 
     public Voluntario(String id, String nome, String endereco, String telefone) {
