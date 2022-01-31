@@ -1,4 +1,4 @@
-package com.ibm.animalshelter.service.service.impl;
+package com.ibm.animalshelter.security;
 
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
