@@ -8,6 +8,7 @@ import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -29,6 +30,7 @@ public class AnimalController {
 
     @GetMapping
     @Operation(summary = "Retorna todos os animais cadastrados")
+    @Secured({"ROLE_USER"})
     public ResponseEntity<List<Animal>> obterTodos() {
 
         logger.info("Busca por todos os animais no banco de dados realizada");
@@ -44,6 +46,7 @@ public class AnimalController {
 
     @GetMapping("/{id}")
     @Operation(summary = "Retorna o animal com ID correspondente")
+    @Secured({"ROLE_USER"})
     public ResponseEntity<Animal> obterPorCodigo(@PathVariable String id) {
 
         logger.info("Busca pelo animal com ID correspondente no banco de dados realizada");
@@ -60,6 +63,7 @@ public class AnimalController {
 
     @PostMapping("/cadastro")
     @Operation(summary = "Salva o animal no banco de dados")
+    @Secured({"ROLE_ADMIN"})
     public ResponseEntity<Animal> salvar(@RequestBody @Valid Animal animal) {
 
 
@@ -76,6 +80,7 @@ public class AnimalController {
 
     @PutMapping("/{id}")
     @Operation(summary = "Atualiza o animal com ID correspondente")
+    @Secured({"ROLE_ADMIN"})
     public ResponseEntity<Animal> atualizar(@Valid @PathVariable String id, @RequestBody Animal animal) {
 
         logger.info("Iniciando a atualização do animal no banco de dados");
@@ -95,6 +100,7 @@ public class AnimalController {
 
     @DeleteMapping("/{id}")
     @Operation(summary = "Deleta o animal com ID correspondente")
+    @Secured({"ROLE_ADMIN"})
     public ResponseEntity<Void> deletar(@PathVariable String id) {
 
         if (!animalRepository.existsById(id)) {

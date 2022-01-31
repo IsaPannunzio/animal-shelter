@@ -8,6 +8,7 @@ import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -29,6 +30,7 @@ public class AbrigoController {
 
     @GetMapping
     @Operation(summary = "Retorna todos os abrigos cadastrados")
+    @Secured({"ROLE_USER"})
     public ResponseEntity<List<Abrigo>> obterTodos() {
 
         logger.info("Busca por todos os abrigos no banco de dados realizada");
@@ -44,6 +46,7 @@ public class AbrigoController {
 
     @GetMapping("/{id}")
     @Operation(summary = "Retorna o abrigo com ID correspondente")
+    @Secured({"ROLE_USER"})
     public ResponseEntity<Abrigo> obterPorCodigo(@PathVariable String id) {
 
         logger.info("Busca pelo abrigo com ID correspondente no banco de dados realizada");
@@ -60,6 +63,7 @@ public class AbrigoController {
 
     @PostMapping("/cadastro")
     @Operation(summary = "Salva o abrigo no banco de dados")
+    @Secured({"ROLE_ADMIN"})
     public ResponseEntity<Abrigo> salvar(@RequestBody @Valid Abrigo abrigo) {
 
 
@@ -76,6 +80,7 @@ public class AbrigoController {
 
     @PutMapping("/{id}")
     @Operation(summary = "Atualiza o abrigo com ID correspondente")
+    @Secured({"ROLE_ADMIN"})
     public ResponseEntity<Abrigo> atualizar(@Valid @PathVariable String id, @RequestBody Abrigo abrigo) {
 
         logger.info("Iniciando a atualização do abrigo no banco de dados");
@@ -95,6 +100,7 @@ public class AbrigoController {
 
     @DeleteMapping("/{id}")
     @Operation(summary = "Deleta o abrigo com ID correspondente")
+    @Secured({"ROLE_ADMIN"})
     public ResponseEntity<Void> deletar(@PathVariable String id) {
 
         if (!abrigoRepository.existsById(id)) {

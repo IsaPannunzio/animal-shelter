@@ -12,6 +12,8 @@ import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
+import java.io.Serializable;
+import java.nio.file.AccessDeniedException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -41,4 +43,20 @@ public class ApiExceptionHandler extends ResponseEntityExceptionHandler {
         return new ResponseEntity<Object>(errorMessage, new HttpHeaders(), errorMessage.getStatus());
     }
 
+
+    @ExceptionHandler({AccessDeniedException.class})
+    public ResponseEntity AcessDenied(){
+
+        String msgErro = "Acesso negado";
+        return ResponseEntity.status(HttpStatus.FORBIDDEN).body(new Error("Acesso negado"));
+
+    }
+
+}
+
+class ExceptionError implements Serializable {
+    private String error;
+    ExceptionError(String error){
+        this.error = error;
+    }
 }
