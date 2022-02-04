@@ -1,53 +1,90 @@
 package com.ibm.animalshelter.exeption;
 
 
-import org.springframework.http.HttpStatus;
+import com.fasterxml.jackson.annotation.JsonInclude;
 
-import java.util.Arrays;
+import java.time.OffsetDateTime;
 import java.util.List;
 
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class ErrorMessage {
 
-    private HttpStatus status;
-    private String message;
-    private List<String> errors;
+    private Integer status;
+    private OffsetDateTime dataHora;
+    private String titulo;
+    private List<Campo> campos;
 
-    public ErrorMessage(HttpStatus status, String message, List<String> errors) {
-        super();
+    public ErrorMessage(Integer status, OffsetDateTime dataHora, String titulo, List<Campo> campos) {
         this.status = status;
-        this.message = message;
-        this.errors = errors;
+        this.dataHora = dataHora;
+        this.titulo = titulo;
+        this.campos = campos;
     }
 
-    public ErrorMessage(HttpStatus status, String message, String error) {
-        super();
-        this.status = status;
-        this.message = message;
-        errors = Arrays.asList(error);
+    public ErrorMessage(){
+
     }
 
-
-    public HttpStatus getStatus() {
+    public Integer getStatus() {
         return status;
     }
 
-    public void setStatus(HttpStatus status) {
+    public void setStatus(Integer status) {
         this.status = status;
     }
 
-    public String getMessage() {
-        return message;
+    public String getTitulo() {
+        return titulo;
     }
 
-    public void setMessage(String message) {
-        this.message = message;
+    public void setTitulo(String titulo) {
+        this.titulo = titulo;
     }
 
-    public List<String> getErrors() {
-        return errors;
+    public List<Campo> getCampos() {
+        return campos;
     }
 
-    public void setErrors(List<String> errors) {
-        this.errors = errors;
+    public void setCampos(List<Campo> campos) {
+        this.campos = campos;
+    }
+
+    public OffsetDateTime getDataHora() {
+        return dataHora;
+    }
+
+    public void setDataHora(OffsetDateTime dataHora) {
+        this.dataHora = dataHora;
+    }
+
+    public static class Campo {
+
+        private String nome;
+        private String mensagem;
+
+        public Campo(String nome, String mensagem) {
+            this.nome = nome;
+            this.mensagem = mensagem;
+        }
+
+        public Campo(){
+
+        }
+
+        public String getNome() {
+            return nome;
+        }
+
+        public void setNome(String nome) {
+            this.nome = nome;
+        }
+
+        public String getMensagem() {
+            return mensagem;
+        }
+
+        public void setMensagem(String mensagem) {
+            this.mensagem = mensagem;
+        }
     }
 }
