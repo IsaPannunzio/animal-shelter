@@ -8,7 +8,6 @@ import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -30,7 +29,6 @@ public class VoluntarioController {
 
     @GetMapping
     @Operation(summary = "Retorna todos os voluntários cadastrados")
-    @Secured({"ROLE_USER"})
     public ResponseEntity<List<Voluntario>> obterTodos() {
 
         logger.info("Busca por todos os voluntários no banco de dados realizada");
@@ -46,7 +44,6 @@ public class VoluntarioController {
 
     @GetMapping("/{id}")
     @Operation(summary = "Retorna o voluntário com ID correspondente")
-    @Secured({"ROLE_USER"})
     public ResponseEntity<Voluntario> obterPorCodigo(@PathVariable String id) {
 
         logger.info("Busca pelo abrigo com ID correspondente no banco de dados realizada");
@@ -61,9 +58,8 @@ public class VoluntarioController {
 
     }
 
-    @PostMapping("/cadastro")
+    @PostMapping("/admin/cadastro")
     @Operation(summary = "Salva o voluntário no banco de dados")
-    @Secured({"ROLE_ADMIN"})
     public ResponseEntity<Voluntario> salvar(@RequestBody @Valid Voluntario voluntario) {
 
 
@@ -78,9 +74,8 @@ public class VoluntarioController {
         return new ResponseEntity<>(voluntario, HttpStatus.CREATED);
     }
 
-    @PutMapping("/{id}")
+    @PutMapping("/admin/{id}")
     @Operation(summary = "Atualiza o voluntário com ID correspondente")
-    @Secured({"ROLE_ADMIN"})
     public ResponseEntity<Voluntario> atualizar(@Valid @PathVariable String id, @RequestBody Voluntario voluntario) {
 
         logger.info("Iniciando a atualização do voluntário no banco de dados");
@@ -98,9 +93,8 @@ public class VoluntarioController {
         return new ResponseEntity<>(voluntario, HttpStatus.OK);
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/admin/{id}")
     @Operation(summary = "Deleta o voluntário com ID correspondente")
-    @Secured({"ROLE_ADMIN"})
     public ResponseEntity<Void> deletar(@PathVariable String id) {
 
         if (!voluntarioRepository.existsById(id)) {

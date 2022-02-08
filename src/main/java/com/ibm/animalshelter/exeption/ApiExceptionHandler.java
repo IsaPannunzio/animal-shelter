@@ -59,13 +59,15 @@ public class ApiExceptionHandler extends ResponseEntityExceptionHandler {
 
 
 
-    @ExceptionHandler({AccessDeniedException.class})
-    public ResponseEntity acessDenied(SecurityException ex,HttpHeaders headers, HttpStatus status, WebRequest request){
-        ErrorMessage errorMessage = new ErrorMessage();
-        errorMessage.setStatus(status.value());
-        errorMessage.setDataHora(OffsetDateTime.now());
-        errorMessage.setTitulo("Acesso negado");
-        return handleExceptionInternal(ex, errorMessage, headers, status, request);
+    @ExceptionHandler(AccessDeniedException.class)
+    public ResponseEntity<Object> accessDenied(SecurityException ex, WebRequest request){
+        HttpStatus status = HttpStatus.FORBIDDEN;
+
+        ErrorMessage securityMessage = new ErrorMessage();
+        securityMessage.setStatus(status.value());
+        securityMessage.setDataHora(OffsetDateTime.now());
+        securityMessage.setTitulo("Acesso negado");
+        return handleExceptionInternal(ex, securityMessage, new HttpHeaders(), status, request);
 
 
 

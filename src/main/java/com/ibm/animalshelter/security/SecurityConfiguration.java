@@ -25,6 +25,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
         http
                 .authorizeRequests()
+                .antMatchers("/api/admin/**", "/api/abrigo/admin/**", "/api/animal/admin/**", "/api/voluntario/admin/**").hasRole("ADMIN")
+                .antMatchers("/api/**", "/api/abrigo/**", "/api/animal/**", "/api/voluntario/**").hasRole("USER")
                 .anyRequest().authenticated()
                 .and()
                 .httpBasic()
