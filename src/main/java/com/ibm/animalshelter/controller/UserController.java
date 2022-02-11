@@ -2,7 +2,6 @@ package com.ibm.animalshelter.controller;
 
 import io.swagger.annotations.Api;
 import io.swagger.v3.oas.annotations.Operation;
-import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,7 +19,6 @@ public class UserController {
 
     @GetMapping("/userInfo")
     @Operation(summary = "Exibe as informações do usuário")
-    @Secured({"ROLE_USER"})
     public UserDetails userInfo(@AuthenticationPrincipal UserDetails user){
         logger.info("Informações do usuário exibidas");
         return user;
