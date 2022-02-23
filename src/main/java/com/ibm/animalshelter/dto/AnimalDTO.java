@@ -1,44 +1,45 @@
-package com.ibm.animalshelter.model.collection;
+package com.ibm.animalshelter.dto;
 
-import io.swagger.v3.oas.annotations.media.Schema;
+import com.ibm.animalshelter.model.collection.Animal;
 import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.Document;
+
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Pattern;
+
+public class AnimalDTO {
 
 
-@Document(collection = "animal")
-public class Animal {
-
-    @Schema(description = "Identificador único do animal")
     @Id
     private String id;
 
-    @Schema(description = "Nome do animal")
+    @Pattern(regexp = "[A-Za-z ]+$", message = "O campo deve conter apenas letras")
+    @NotBlank(message = "O campo deve ser preenchido")
     private String nome;
 
-    @Schema(description = "Tipo do animal")
+    @Pattern(regexp = "[A-Za-z ]+$", message = "O campo deve conter apenas letras")
+    @NotBlank(message = "O campo deve ser preenchido")
     private String tipo;
 
-    @Schema(description = "Raça do animal")
+    @Pattern(regexp = "[A-Za-z ]+$", message = "O campo deve conter apenas letras")
+    @NotBlank(message = "O campo deve ser preenchido")
     private String raca;
 
-    @Schema(description = "Sexo do animal")
+    @Pattern(regexp = "[A-Za-z ]+$", message = "O campo deve conter apenas letras")
+    @NotBlank(message = "O campo deve ser preenchido")
     private String sexo;
 
-    @Schema(description = "Idade do animal")
+    @NotBlank(message = "O campo deve ser preenchido")
     private int idade;
 
-    @Schema(description = "O animal é castrado?")
     private boolean castrado;
 
-    public Animal(String id, String nome, String tipo, String raca, String sexo, int idade, boolean castrado) {
+    public Animal transformaParaObjeto(){
 
-        this.id = id;
-        this.nome = nome;
-        this.tipo = tipo;
-        this.raca = raca;
-        this.sexo = sexo;
-        this.idade = idade;
-        this.castrado = castrado;
+        return new Animal(id, nome, tipo, raca, sexo, idade, castrado);
+    }
+
+    public AnimalDTO() {
+
     }
 
     public String getId() {

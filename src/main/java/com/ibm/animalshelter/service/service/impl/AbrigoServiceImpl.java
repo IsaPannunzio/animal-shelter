@@ -1,5 +1,6 @@
 package com.ibm.animalshelter.service.service.impl;
 
+import com.ibm.animalshelter.dto.AbrigoDTO;
 import com.ibm.animalshelter.model.collection.Abrigo;
 import com.ibm.animalshelter.repository.AbrigoRepository;
 import com.ibm.animalshelter.service.AbrigoService;
@@ -53,6 +54,7 @@ public class AbrigoServiceImpl implements AbrigoService {
         logger.info("Abrigo deletado do banco de dados");
         this.abrigoRepository.deleteById(id);
     }
+
 
 }
 

@@ -1,5 +1,7 @@
 package com.ibm.animalshelter.controller;
 
+import com.ibm.animalshelter.dto.UsuarioDTO;
+import com.ibm.animalshelter.model.collection.Abrigo;
 import com.ibm.animalshelter.model.collection.Usuario;
 import com.ibm.animalshelter.repository.UsuarioRepository;
 import com.ibm.animalshelter.service.UsuarioService;
@@ -60,15 +62,15 @@ public class UsuarioController {
 
     @PostMapping("/admin/cadastro")
     @Operation(summary = "Salva o usuário no banco de dados")
-    public ResponseEntity<Usuario> salvar(@RequestBody @Valid Usuario usuario) {
+    public ResponseEntity<Usuario> salvar(@RequestBody @Valid UsuarioDTO dto) {
 
 
-        if (usuario == null) {
+        if (dto == null) {
             logger.info("Corpo vazio, retorna BAD REQUEST");
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
 
-        usuarioService.salvar(usuario);
+        Usuario usuario = usuarioService.salvar(dto.transformaParaObjeto());
 
         logger.info("Usuário adicionado ao banco de dados");
         return new ResponseEntity<>(usuario, HttpStatus.CREATED);
@@ -76,18 +78,17 @@ public class UsuarioController {
 
     @PutMapping("/admin/{id}")
     @Operation(summary = "Atualiza o usuário com ID correspondente")
-    public ResponseEntity<Usuario> atualizar(@Valid @PathVariable String id, @RequestBody Usuario usuario) {
+    public ResponseEntity<Usuario> atualizar(@Valid @PathVariable String id, @RequestBody UsuarioDTO dto) {
 
         logger.info("Iniciando a atualização do usuário no banco de dados");
-        boolean usuarioExiste = this.usuarioRepository.existsById(usuario.getId());
+        boolean usuarioExiste = this.usuarioRepository.existsById(dto.getId());
 
         if (!usuarioExiste) {
             logger.info("O usuário não existe, retorna BAD REQUEST");
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
 
-        usuario.setId(id);
-        usuario = usuarioService.atualizar(usuario);
+        Usuario usuario = usuarioService.atualizar(dto.transformaParaObjeto());
 
         logger.info("Usuário atualizado, staus OK");
         return new ResponseEntity<>(usuario, HttpStatus.OK);

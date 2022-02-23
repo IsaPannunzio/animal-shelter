@@ -1,26 +1,24 @@
 package com.ibm.animalshelter.model.collection;
 
+import io.swagger.v3.oas.annotations.media.Schema;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Pattern;
 
 @Document(collection = "voluntario")
 public class Voluntario {
 
+    @Schema(description = "Identificador único do voluntário")
     @Id
     private String id;
 
-    @NotBlank(message = "O campo deve ser preenchido")
-    @Pattern(regexp = "[A-Za-z ]+$", message = "O campo deve conter apenas letras")
+    @Schema(description = "Nome do voluntário")
     private String nome;
 
-    @NotBlank(message = "O campo deve ser preenchido")
+    @Schema(description = "Endereço do voluntário")
     private String endereco;
 
-    @NotBlank(message = "O campo deve ser preenchido")
-    @Pattern(regexp = "[0-9]+$", message = "O campo deve conter apenas números")
+    @Schema(description = "Telefone do voluntário")
     private String telefone;
 
     public Voluntario(String id, String nome, String endereco, String telefone) {

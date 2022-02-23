@@ -17,4 +17,5 @@ public interface AnimalService {
     Animal atualizar(Animal animal);
 
     void deletar(String id);
+
 }

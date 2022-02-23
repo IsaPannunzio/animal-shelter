@@ -1,5 +1,6 @@
 package com.ibm.animalshelter.controller;
 
+import com.ibm.animalshelter.dto.AbrigoDTO;
 import com.ibm.animalshelter.model.collection.Abrigo;
 import com.ibm.animalshelter.repository.AbrigoRepository;
 import com.ibm.animalshelter.service.AbrigoService;
@@ -60,15 +61,14 @@ public class AbrigoController {
 
     @PostMapping("/admin/cadastro")
     @Operation(summary = "Salva o abrigo no banco de dados")
-    public ResponseEntity<Abrigo> salvar(@RequestBody @Valid Abrigo abrigo) {
+    public ResponseEntity<Abrigo> salvar(@RequestBody @Valid AbrigoDTO dto) {
 
-
-        if (abrigo == null) {
+        if (dto == null) {
             logger.info("Corpo vazio, retorna BAD REQUEST");
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
 
-        abrigoService.salvar(abrigo);
+        Abrigo abrigo = abrigoService.salvar(dto.transformaParaObjeto());
 
         logger.info("Abrigo adicionado ao banco de dados");
         return new ResponseEntity<>(abrigo, HttpStatus.CREATED);
@@ -76,18 +76,18 @@ public class AbrigoController {
 
     @PutMapping("/admin/{id}")
     @Operation(summary = "Atualiza o abrigo com ID correspondente")
-    public ResponseEntity<Abrigo> atualizar(@Valid @PathVariable String id, @RequestBody Abrigo abrigo) {
+    public ResponseEntity<Abrigo> atualizar(@Valid @PathVariable String id, @RequestBody AbrigoDTO dto) {
 
         logger.info("Iniciando a atualização do abrigo no banco de dados");
-        boolean abrigoExiste = this.abrigoRepository.existsById(abrigo.getId());
+        boolean abrigoExiste = this.abrigoRepository.existsById(dto.getId());
 
         if (!abrigoExiste) {
             logger.info("O abrigo não existe, retorna BAD REQUEST");
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
 
-        abrigo.setId(id);
-        abrigo = abrigoService.atualizar(abrigo);
+
+        Abrigo abrigo = abrigoService.atualizar(dto.transformaParaObjeto());
 
         logger.info("Abrigo atualizado, staus OK");
         return new ResponseEntity<>(abrigo, HttpStatus.OK);

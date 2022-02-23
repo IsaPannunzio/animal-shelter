@@ -17,4 +17,5 @@ public interface VoluntarioService {
     Voluntario atualizar(Voluntario voluntario);
 
     void deletar(String id);
+
 }

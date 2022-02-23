@@ -1,5 +1,7 @@
 package com.ibm.animalshelter.controller;
 
+import com.ibm.animalshelter.dto.VoluntarioDTO;
+import com.ibm.animalshelter.model.collection.Abrigo;
 import com.ibm.animalshelter.model.collection.Voluntario;
 import com.ibm.animalshelter.repository.VoluntarioRepository;
 import com.ibm.animalshelter.service.VoluntarioService;
@@ -60,15 +62,15 @@ public class VoluntarioController {
 
     @PostMapping("/admin/cadastro")
     @Operation(summary = "Salva o voluntário no banco de dados")
-    public ResponseEntity<Voluntario> salvar(@RequestBody @Valid Voluntario voluntario) {
+    public ResponseEntity<Voluntario> salvar(@RequestBody @Valid VoluntarioDTO dto) {
 
 
-        if (voluntario == null) {
+        if (dto == null) {
             logger.info("Corpo vazio, retorna BAD REQUEST");
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
 
-        voluntarioService.salvar(voluntario);
+        Voluntario voluntario = voluntarioService.salvar(dto.transformaParaObjeto());
 
         logger.info("Voluntário adicionado ao banco de dados");
         return new ResponseEntity<>(voluntario, HttpStatus.CREATED);
@@ -76,18 +78,17 @@ public class VoluntarioController {
 
     @PutMapping("/admin/{id}")
     @Operation(summary = "Atualiza o voluntário com ID correspondente")
-    public ResponseEntity<Voluntario> atualizar(@Valid @PathVariable String id, @RequestBody Voluntario voluntario) {
+    public ResponseEntity<Voluntario> atualizar(@Valid @PathVariable String id, @RequestBody VoluntarioDTO dto) {
 
         logger.info("Iniciando a atualização do voluntário no banco de dados");
-        boolean voluntarioExiste = this.voluntarioRepository.existsById(voluntario.getId());
+        boolean voluntarioExiste = this.voluntarioRepository.existsById(dto.getId());
 
         if (!voluntarioExiste) {
             logger.info("O voluntário não existe, retorna BAD REQUEST");
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
 
-        voluntario.setId(id);
-        voluntario = voluntarioService.atualizar(voluntario);
+        Voluntario voluntario = voluntarioService.atualizar(dto.transformaParaObjeto());
 
         logger.info("Voluntário atualizado, staus OK");
         return new ResponseEntity<>(voluntario, HttpStatus.OK);

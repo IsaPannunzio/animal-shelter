@@ -1,5 +1,7 @@
 package com.ibm.animalshelter.controller;
 
+import com.ibm.animalshelter.dto.AnimalDTO;
+import com.ibm.animalshelter.model.collection.Abrigo;
 import com.ibm.animalshelter.model.collection.Animal;
 import com.ibm.animalshelter.repository.AnimalRepository;
 import com.ibm.animalshelter.service.AnimalService;
@@ -60,15 +62,15 @@ public class AnimalController {
 
     @PostMapping("/admin/cadastro")
     @Operation(summary = "Salva o animal no banco de dados")
-    public ResponseEntity<Animal> salvar(@RequestBody @Valid Animal animal) {
+    public ResponseEntity<Animal> salvar(@RequestBody @Valid AnimalDTO dto) {
 
 
-        if (animal == null) {
+        if (dto == null) {
             logger.info("Corpo vazio, retorna BAD REQUEST");
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
 
-        animalService.salvar(animal);
+        Animal animal = animalService.salvar(dto.transformaParaObjeto());
 
         logger.info("Animal adicionado ao banco de dados");
         return new ResponseEntity<>(animal, HttpStatus.CREATED);
@@ -76,18 +78,17 @@ public class AnimalController {
 
     @PutMapping("/admin/{id}")
     @Operation(summary = "Atualiza o animal com ID correspondente")
-    public ResponseEntity<Animal> atualizar(@Valid @PathVariable String id, @RequestBody Animal animal) {
+    public ResponseEntity<Animal> atualizar(@Valid @PathVariable String id, @RequestBody AnimalDTO dto) {
 
         logger.info("Iniciando a atualização do animal no banco de dados");
-        boolean animalExiste = this.animalRepository.existsById(animal.getId());
+        boolean animalExiste = this.animalRepository.existsById(dto.getId());
 
         if (!animalExiste) {
             logger.info("O animal não existe, retorna BAD REQUEST");
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
 
-        animal.setId(id);
-        animal = animalService.atualizar(animal);
+        Animal animal = animalService.atualizar(dto.transformaParaObjeto());
 
         logger.info("Animal atualizado, staus OK");
         return new ResponseEntity<>(animal, HttpStatus.OK);

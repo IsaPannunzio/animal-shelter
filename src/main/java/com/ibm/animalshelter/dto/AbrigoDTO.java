@@ -1,32 +1,36 @@
-package com.ibm.animalshelter.model.collection;
+package com.ibm.animalshelter.dto;
 
-import io.swagger.v3.oas.annotations.media.Schema;
+
+import com.ibm.animalshelter.model.collection.Abrigo;
 import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.Document;
+
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Pattern;
+
+public class AbrigoDTO {
 
 
-@Document(collection = "abrigo")
-public class Abrigo {
-
-    @Schema(description = "Identificador único do abrigo")
     @Id
     private String id;
 
-    @Schema(description = "Nome do abrigo")
+    @Pattern(regexp = "[A-Za-z ]+$", message = "O campo deve conter apenas letras")
+    @NotBlank(message = "O campo deve ser preenchido")
     private String nome;
 
-    @Schema(description = "Endereço do abrigo")
+    @NotBlank(message = "O campo deve ser preenchido")
     private String endereco;
 
-    @Schema(description = "Telefone do abrigo")
+    @Pattern(regexp = "[0-9]+$", message = "O campo deve conter apenas números")
+    @NotBlank(message = "O campo deve ser preenchido")
     private String telefone;
 
-    public Abrigo(String id, String nome, String endereco, String telefone) {
+    public Abrigo transformaParaObjeto(){
 
-        this.id = id;
-        this.nome = nome;
-        this.endereco = endereco;
-        this.telefone = telefone;
+        return new Abrigo(id, nome, endereco, telefone);
+    }
+
+    public AbrigoDTO() {
+
     }
 
     public String getId() {
@@ -61,6 +65,3 @@ public class Abrigo {
         this.telefone = telefone;
     }
 }
-
-
-

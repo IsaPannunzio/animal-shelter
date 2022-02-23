@@ -1,31 +1,36 @@
-package com.ibm.animalshelter.model.collection;
+package com.ibm.animalshelter.dto;
 
-import io.swagger.v3.oas.annotations.media.Schema;
+
+import com.ibm.animalshelter.model.collection.Abrigo;
+import com.ibm.animalshelter.model.collection.Usuario;
 import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.Document;
+
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Pattern;
+
+public class UsuarioDTO {
 
 
-@Document(collection = "usuario")
-public class Usuario {
-
-    @Schema(description = "Identificador único do usuário")
     @Id
     private String id;
 
-    @Schema(description = "Nome de usuário")
+    @NotBlank(message = "O campo deve ser preenchido")
     private String usuario;
 
-    @Schema(description = "E-mail do usuário")
+    @Pattern(regexp = "[A-Za-z0-9+_.-]+@(.+)$", message = "E-mail inválido")
+    @NotBlank(message = "O campo deve ser preenchido")
     private String email;
 
-    @Schema(description = "Senha do usuário")
+    @NotBlank(message = "O campo deve ser preenchido")
     private String senha;
 
-    public Usuario(String id, String usuario, String email, String senha) {
-        this.id = id;
-        this.usuario = usuario;
-        this.email = email;
-        this.senha = senha;
+    public Usuario transformaParaObjeto(){
+
+        return new Usuario(id, usuario, email, senha);
+    }
+
+    public UsuarioDTO() {
+
     }
 
     public String getId() {
