@@ -5,7 +5,7 @@ Esse projeto é uma API REST de Abrigo de Animais.
 
 # Tecnologias Utilizadas
 * Java
-* Springboot
+* Spring Boot
 * MongoDB
 * Docker
 
