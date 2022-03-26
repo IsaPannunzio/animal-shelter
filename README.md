@@ -6,8 +6,9 @@ Esse projeto é uma API REST de Abrigo de Animais.
 # Tecnologias Utilizadas
 * Java
 * Spring Boot
-* MongoDB
 * Maven
+* REST
+* MongoDB
 
 # Link da API no Heroku
 
