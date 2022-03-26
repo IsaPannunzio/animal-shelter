@@ -7,7 +7,7 @@ Esse projeto é uma API REST de Abrigo de Animais.
 * Java
 * Spring Boot
 * MongoDB
-* Docker
+* Maven
 
 # Link da API no Heroku
 
