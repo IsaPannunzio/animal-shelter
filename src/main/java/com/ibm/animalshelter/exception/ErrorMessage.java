@@ -1,4 +1,4 @@
-package com.ibm.animalshelter.exeption;
+package com.ibm.animalshelter.exception;
 
 
 import com.fasterxml.jackson.annotation.JsonInclude;

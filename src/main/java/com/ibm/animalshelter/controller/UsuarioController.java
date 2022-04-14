@@ -1,7 +1,6 @@
 package com.ibm.animalshelter.controller;
 
 import com.ibm.animalshelter.dto.UsuarioDTO;
-import com.ibm.animalshelter.model.collection.Abrigo;
 import com.ibm.animalshelter.model.collection.Usuario;
 import com.ibm.animalshelter.repository.UsuarioRepository;
 import com.ibm.animalshelter.service.UsuarioService;

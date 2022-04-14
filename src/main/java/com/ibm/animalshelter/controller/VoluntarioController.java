@@ -1,7 +1,6 @@
 package com.ibm.animalshelter.controller;
 
 import com.ibm.animalshelter.dto.VoluntarioDTO;
-import com.ibm.animalshelter.model.collection.Abrigo;
 import com.ibm.animalshelter.model.collection.Voluntario;
 import com.ibm.animalshelter.repository.VoluntarioRepository;
 import com.ibm.animalshelter.service.VoluntarioService;
